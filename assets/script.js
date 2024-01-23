@@ -9,9 +9,10 @@ displayDate()
 
 
 // Color-code each timeblock based on past, present, and future when the timeblock is viewed:
+
 function changeColor() {
     $(".time-block").each(function() {
-        var currentHour = parseInt(moment().format("H"));
+        var currentHour = parseInt(dayjs().format("H"));
         var hour = parseInt($(this).attr("id"));
         if (hour < currentHour) {
             $(this).addClass("past");
@@ -23,4 +24,30 @@ function changeColor() {
     })
 }
 changeColor();
+
+//Save the event in local storage when the save button is clicked in that timeblock:
+
+$(".saveBtn").click(function (event) {
+        event.preventDefault();
+    
+        var time = $(this).parent().attr("id");
+        var content = $(this).siblings(".row").val();
+    
+        localStorage.setItem(time, content);
+
+        console.log(time, content);
+    });
+
+//get data from the localstorage
+$("#hour-9").val(localStorage.getItem("9"));
+$("hour-10").val(localStorage.getItem("10"));
+$("#hour-11").val(localStorage.getItem("11"));
+$("#hour-12").val(localStorage.getItem("12"));
+$("#hour-1").val(localStorage.getItem("1"));
+$("#hour-2").val(localStorage.getItem("2"));
+$("#hour-3").val(localStorage.getItem("3"));
+$("#hour-4").val(localStorage.getItem("4"));
+$("#hour-5").val(localStorage.getItem("5"));
+
+
 
